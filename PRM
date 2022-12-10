@@ -1,0 +1,66 @@
+
+create view OCT as 
+select *,  SUBSTRING(time_as_failure,14, 6) timee
+from [dbo].[October_Reception_Fails]
+
+select *, 
+CASE 
+    WHEN timee LIKE '12%' AND timee LIKE '%PM'THEN '12'
+	WHEN timee LIKE '1%' AND timee LIKE '%PM'THEN '13' 
+	WHEN timee LIKE '2%' AND timee LIKE '%PM'THEN '14'
+	WHEN timee LIKE '3%' AND timee LIKE '%PM'THEN '15'
+	WHEN timee LIKE '4%' AND timee LIKE '%PM'THEN '16'
+	WHEN timee LIKE '5%' AND timee LIKE '%PM'THEN '17'
+	WHEN timee LIKE '6%' AND timee LIKE '%PM'THEN '18'
+	WHEN timee LIKE '7%' AND timee LIKE '%PM'THEN '19'
+	WHEN timee LIKE '8%' AND timee LIKE '%PM'THEN '20'
+	WHEN timee LIKE '9%' AND timee LIKE '%PM'THEN '21'
+	WHEN timee LIKE '10%' AND timee LIKE '%PM'THEN '22'
+	WHEN timee LIKE '11%' AND timee LIKE '%PM'THEN '23'
+	WHEN timee LIKE '0%' AND timee LIKE '%AM'THEN '00'
+	WHEN timee LIKE '1%' AND timee LIKE '%AM'THEN '01'
+	WHEN timee LIKE '2%' AND timee LIKE '%AM'THEN '02'
+	WHEN timee LIKE '3%' AND timee LIKE '%AM'THEN '03'
+	WHEN timee LIKE '4%' AND timee LIKE '%AM'THEN '04'
+	WHEN timee LIKE '5%' AND timee LIKE '%AM'THEN '05'
+	WHEN timee LIKE '6%' AND timee LIKE '%AM'THEN '06'
+	WHEN timee LIKE '7%' AND timee LIKE '%AM'THEN '07'
+	WHEN timee LIKE '8%' AND timee LIKE '%AM'THEN '08'
+	WHEN timee LIKE '9%' AND timee LIKE '%AM'THEN '09'
+	WHEN timee LIKE '10%' AND timee LIKE '%AM'THEN '10'
+	WHEN timee LIKE '11%' AND timee LIKE '%AM'THEN '11'
+	else timee end as '24_hour'
+from OCT
+
+
+
+create view OCT_complete as 
+
+select *, 
+CASE 
+    WHEN timee LIKE '12%' AND timee LIKE '%PM'THEN '12'
+	WHEN timee LIKE '1%' AND timee LIKE '%PM'THEN '13' 
+	WHEN timee LIKE '2%' AND timee LIKE '%PM'THEN '14'
+	WHEN timee LIKE '3%' AND timee LIKE '%PM'THEN '15'
+	WHEN timee LIKE '4%' AND timee LIKE '%PM'THEN '16'
+	WHEN timee LIKE '5%' AND timee LIKE '%PM'THEN '17'
+	WHEN timee LIKE '6%' AND timee LIKE '%PM'THEN '18'
+	WHEN timee LIKE '7%' AND timee LIKE '%PM'THEN '19'
+	WHEN timee LIKE '8%' AND timee LIKE '%PM'THEN '20'
+	WHEN timee LIKE '9%' AND timee LIKE '%PM'THEN '21'
+	WHEN timee LIKE '10%' AND timee LIKE '%PM'THEN '22'
+	WHEN timee LIKE '11%' AND timee LIKE '%PM'THEN '23'
+	WHEN timee LIKE '0%' AND timee LIKE '%AM'THEN '00'
+	WHEN timee LIKE '1%' AND timee LIKE '%AM'THEN '01'
+	WHEN timee LIKE '2%' AND timee LIKE '%AM'THEN '02'
+	WHEN timee LIKE '3%' AND timee LIKE '%AM'THEN '03'
+	WHEN timee LIKE '4%' AND timee LIKE '%AM'THEN '04'
+	WHEN timee LIKE '5%' AND timee LIKE '%AM'THEN '05'
+	WHEN timee LIKE '6%' AND timee LIKE '%AM'THEN '06'
+	WHEN timee LIKE '7%' AND timee LIKE '%AM'THEN '07'
+	WHEN timee LIKE '8%' AND timee LIKE '%AM'THEN '08'
+	WHEN timee LIKE '9%' AND timee LIKE '%AM'THEN '09'
+	WHEN timee LIKE '10%' AND timee LIKE '%AM'THEN '10'
+	WHEN timee LIKE '11%' AND timee LIKE '%AM'THEN '11'
+	else timee end as '24_hour'
+from OCT
