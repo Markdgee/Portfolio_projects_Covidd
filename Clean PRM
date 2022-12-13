@@ -1,0 +1,113 @@
+SELECT COUNT(*) FROM [dbo].[Arrivals - Aug ]
+SELECT * FROM [dbo].[Arrivals - Sept]
+SELECT * FROM [dbo].[Arrivals - Oct ]
+SELECT * FROM [dbo].[Arrivals - Nov]
+
+create view arrival_aug_part2 as 
+select *, cast(F19 as nvarchar) as time_date from [dbo].[Arrivals - Aug ]
+
+create view arrival_sep_part2 as 
+select *, cast(F19 as nvarchar) as time_date from [dbo].[Arrivals - Sept]
+
+create view arrival_oct_part2 as 
+select *, cast(F19 as nvarchar) as time_date from [dbo].[Arrivals - Oct ]
+
+create view arrival_nov1_part2 as 
+select *, cast(F11 as nvarchar) as time_date from [dbo].[Arrivals - Nov]
+
+select * from arrival_aug_part2  --pm/am 
+select * from arrival_sep_part2  --24
+select * from arrival_oct_part2  --24
+select * from arrival_nov1_part2 --pm/am
+
+
+create view sep_ARRIVAL_final as 
+select *,  SUBSTRING(time_date,12, 2) timee
+from arrival_sep_part2
+
+create view oct_ARRIVAL_final as 
+select *,  SUBSTRING(time_date,12, 2) timee
+from arrival_oct_part2
+
+create view aug_reception_semi_21 as 
+select *,  SUBSTRING(time_date,13, 8) timee
+from arrival_aug_part2
+
+--create view aug_reception_semi_2 as 
+--select *,  SUBSTRING(time_date,14, 8) timee
+--from arrival_aug_part2
+ 
+
+create view nov_reception_semi_21 as 
+select *,  SUBSTRING(time_date,13, 8) timee
+from arrival_nov1_part2 
+
+create view aug_arrival_complete as 
+
+select *, 
+CASE 
+    WHEN timee LIKE '12%' AND timee LIKE '%PM'THEN '12'
+	WHEN timee LIKE ' 1%' AND timee LIKE '%PM'THEN '13' 
+	WHEN timee LIKE ' 2%' AND timee LIKE '%PM'THEN '14'
+	WHEN timee LIKE ' 3%' AND timee LIKE '%PM'THEN '15'
+	WHEN timee LIKE ' 4%' AND timee LIKE '%PM'THEN '16'
+	WHEN timee LIKE ' 5%' AND timee LIKE '%PM'THEN '17'
+	WHEN timee LIKE ' 6%' AND timee LIKE '%PM'THEN '18'
+	WHEN timee LIKE ' 7%' AND timee LIKE '%PM'THEN '19'
+	WHEN timee LIKE ' 8%' AND timee LIKE '%PM'THEN '20'
+	WHEN timee LIKE ' 9%' AND timee LIKE '%PM'THEN '21'
+	WHEN timee LIKE '10%' AND timee LIKE '%PM'THEN '22'
+	WHEN timee LIKE '11%' AND timee LIKE '%PM'THEN '23'
+	WHEN timee LIKE ' 0%' AND timee LIKE '%AM'THEN '00'
+	WHEN timee LIKE ' 1%' AND timee LIKE '%AM'THEN '01'
+	WHEN timee LIKE ' 2%' AND timee LIKE '%AM'THEN '02'
+	WHEN timee LIKE ' 3%' AND timee LIKE '%AM'THEN '03'
+	WHEN timee LIKE ' 4%' AND timee LIKE '%AM'THEN '04'
+	WHEN timee LIKE ' 5%' AND timee LIKE '%AM'THEN '05'
+	WHEN timee LIKE ' 6%' AND timee LIKE '%AM'THEN '06'
+	WHEN timee LIKE ' 7%' AND timee LIKE '%AM'THEN '07'
+	WHEN timee LIKE ' 8%' AND timee LIKE '%AM'THEN '08'
+	WHEN timee LIKE ' 9%' AND timee LIKE '%AM'THEN '09'
+	WHEN timee LIKE '10%' AND timee LIKE '%AM'THEN '10'
+	WHEN timee LIKE '11%' AND timee LIKE '%AM'THEN '11'
+	WHEN timee LIKE '12%' AND timee LIKE '%AM'THEN '00'
+	else timee end as '24_hour'
+from aug_reception_semi_21
+ 
+ create view nov_ARRIVAL_complete as 
+
+select *, 
+CASE 
+    WHEN timee LIKE '12%' AND timee LIKE '%PM'THEN '12'
+	WHEN timee LIKE ' 1%' AND timee LIKE '%PM'THEN '13' 
+	WHEN timee LIKE ' 2%' AND timee LIKE '%PM'THEN '14'
+	WHEN timee LIKE ' 3%' AND timee LIKE '%PM'THEN '15'
+	WHEN timee LIKE ' 4%' AND timee LIKE '%PM'THEN '16'
+	WHEN timee LIKE ' 5%' AND timee LIKE '%PM'THEN '17'
+	WHEN timee LIKE ' 6%' AND timee LIKE '%PM'THEN '18'
+	WHEN timee LIKE ' 7%' AND timee LIKE '%PM'THEN '19'
+	WHEN timee LIKE ' 8%' AND timee LIKE '%PM'THEN '20'
+	WHEN timee LIKE ' 9%' AND timee LIKE '%PM'THEN '21'
+	WHEN timee LIKE '10%' AND timee LIKE '%PM'THEN '22'
+	WHEN timee LIKE '11%' AND timee LIKE '%PM'THEN '23'
+	WHEN timee LIKE ' 0%' AND timee LIKE '%AM'THEN '00'
+	WHEN timee LIKE ' 1%' AND timee LIKE '%AM'THEN '01'
+	WHEN timee LIKE ' 2%' AND timee LIKE '%AM'THEN '02'
+	WHEN timee LIKE ' 3%' AND timee LIKE '%AM'THEN '03'
+	WHEN timee LIKE ' 4%' AND timee LIKE '%AM'THEN '04'
+	WHEN timee LIKE ' 5%' AND timee LIKE '%AM'THEN '05'
+	WHEN timee LIKE ' 6%' AND timee LIKE '%AM'THEN '06'
+	WHEN timee LIKE ' 7%' AND timee LIKE '%AM'THEN '07'
+	WHEN timee LIKE ' 8%' AND timee LIKE '%AM'THEN '08'
+	WHEN timee LIKE ' 9%' AND timee LIKE '%AM'THEN '09'
+	WHEN timee LIKE '10%' AND timee LIKE '%AM'THEN '10'
+	WHEN timee LIKE '11%' AND timee LIKE '%AM'THEN '11'
+	WHEN timee LIKE '12%' AND timee LIKE '%AM'THEN '00'
+	else timee end as '24_hour'
+from nov_reception_semi_21
+
+
+select * from oct_arrival_final 
+select * from sep_arrival_final 
+select * from aug_arrival_complete 
+select * from nov_arrival_complete
